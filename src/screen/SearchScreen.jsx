@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, Image, TouchableOpacity, View,Text, SafeAreaView } from 'react-native'
-
 import { ScreenHeaderBtn,NearbyJobCard } from '../components'
 import styles from '../components/search'
 import { COLORS,icons,SIZES } from '../constants'
+import {RAPID_API_KEY} from "@env"
+
 import axios from 'axios'
 
-const SearchScreen = ({navigation,route}) => {
+const SearchScreen = ({navigation,route,}) => {
     const [searchResult, setSearchResult] = useState([]);
     const [searchLoader, setSearchLoader] = useState(false);
     const [searchError, setSearchError] = useState(null);
@@ -22,11 +23,11 @@ const SearchScreen = ({navigation,route}) => {
                 method: "GET",
                 url: `https://jsearch.p.rapidapi.com/search`,
                 headers: {
-                    "X-RapidAPI-Key": '',
+                    "X-RapidAPI-Key": RAPID_API_KEY,
                     "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
                 },
                 params: {
-                    query:  route.params?.id,
+                    query:  route.params?.searchTerm ||  route.params?.item,
                     page: page.toString(),
                 },
             };
@@ -41,6 +42,8 @@ const SearchScreen = ({navigation,route}) => {
         }
     };
 
+    console.log()
+
     const handlePagination = (direction) => {
         if (direction === 'left' && page > 1) {
             setPage(page - 1)
@@ -50,7 +53,7 @@ const SearchScreen = ({navigation,route}) => {
             handleSearch()
         }
     }
-
+console.log(route.params?.id)
 
     useEffect(() => {
         handleSearch()
