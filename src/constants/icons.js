@@ -19,5 +19,7 @@ export default {
   share,
   location,
   chevronLeft,
-  chevronRight
+  chevronRight,
+  
+
 };

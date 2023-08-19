@@ -18,7 +18,6 @@ export default function JobDetailScreen({ navigation }){
    const onRefresh=()=>{
 
    }
-    // console.log(route.params.job.job_id)
     const displayTabContent = () => {
         switch (activeTab) {
           case "Qualifications":

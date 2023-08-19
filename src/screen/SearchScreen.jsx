@@ -42,7 +42,6 @@ const SearchScreen = ({navigation,route,}) => {
         }
     };
 
-    console.log()
 
     const handlePagination = (direction) => {
         if (direction === 'left' && page > 1) {
@@ -53,7 +52,6 @@ const SearchScreen = ({navigation,route,}) => {
             handleSearch()
         }
     }
-console.log(route.params?.id)
 
     useEffect(() => {
         handleSearch()
