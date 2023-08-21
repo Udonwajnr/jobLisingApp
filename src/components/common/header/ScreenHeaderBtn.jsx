@@ -7,11 +7,11 @@ const ScreenHeaderBtn = ({ iconUrl, dimension}) => {
   const navigation = useNavigation()
   return (
     <TouchableOpacity style={styles.btnContainer} onPress={navigation.goBack}>
-      <Image
+      {/* <Image
         source={iconUrl}
         resizeMode='cover'
         style={styles.btnImg(dimension)}
-      />
+      /> */}
     </TouchableOpacity>
   );
 };

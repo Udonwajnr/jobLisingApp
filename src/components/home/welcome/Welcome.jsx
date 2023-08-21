@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -11,18 +11,22 @@ import { useRoute } from "@react-navigation/native";
 
 import styles from "./welcome.style";
 import { icons, SIZES } from "../../../constants";
+import { AuthContext } from "../../../context/context";
 
 const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
 const Welcome = ({ searchTerm, setSearchTerm, handleClick,navigation }) => {
- 
-  const router = useRoute();
+
+  const {userToken} = useContext(AuthContext)
   const [activeJobType, setActiveJobType] = useState("Full-time");
+
+  const value =JSON.parse(userToken)
+  const name =value?.email?.split("@")
 
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Adrian</Text>
+        <Text style={styles.userName}>Welcome, {name[0]}</Text>
         <Text style={styles.welcomeMessage}>Find your perfect job</Text>
       </View>
 

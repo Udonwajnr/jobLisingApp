@@ -1,13 +1,19 @@
 import React, { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { supabase } from "../../lib/supabase";
-import { Alert } from "react-native";
+import { Alert,Linking } from "react-native";
+
 
 export const AuthContext = createContext();
 
+
 export const AuthProvider=({children})=>{
     const [isLoading,setIsLoading] = useState(false)
-    const [userToken,setUserToken] = useState('hello')
+    const [userToken,setUserToken] = useState(null)
+    const [forgetToken,setForgetToken] = useState(false)
+    const [changedPassword,setChangedPassword] = useState(false)
+
+
     
     const signUp=async(email,password)=>{
         let { data,error} = await supabase.auth.signUp({
@@ -22,7 +28,6 @@ export const AuthProvider=({children})=>{
      }else{
             Alert.alert(error.message)
      }
-
     }
 
     const login=async(email,password)=>{
@@ -59,12 +64,25 @@ export const AuthProvider=({children})=>{
         setIsLoading(false)
     }
 
+    const forgetPassword=async(email)=>{
+       await supabase.auth.resetPasswordForEmail(
+        email,{redirectTo:"joblistingapp://app/setnewpassword/hello"}
+        )
+        setForgetToken(true)
+    }
+
+    const updatePassword=async(new_password)=>{
+        await supabase.auth.updateUser({ password: new_password })
+        // setUserToken('done')
+        setChangedPassword(true)
+    }
+
     useEffect(()=>{
         isLoggedIn()
     },[])
 
     return(
-        <AuthContext.Provider value={{login,logout,isLoading,userToken,signUp}}>
+        <AuthContext.Provider value={{login,logout,isLoading,userToken,signUp,forgetPassword,forgetToken,updatePassword,changedPassword }}>
             {children}
         </AuthContext.Provider>
     )    
