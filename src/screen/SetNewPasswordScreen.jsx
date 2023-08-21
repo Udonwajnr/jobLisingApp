@@ -7,7 +7,7 @@ export default function SetNewPasswordScreen(){
     const [password,setPassword] = useState('')
     const {updatePassword} = useContext(AuthContext)
     const {changedPassword} = useContext(AuthContext)
-    console.log(changedPassword)
+    // console.log(changedPassword)
     if(changedPassword){
         return(
             <LoginScreen/>

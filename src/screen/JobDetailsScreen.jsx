@@ -73,7 +73,7 @@ export default function JobDetailScreen({ navigation }){
                     </View>
             }
             </ScrollView>    
-                <JobFooter url={data[0]?.job_google_link ?? 'https://careers.google.com/jobs/results/'} titleJob={data[0]?.job_title}/>
+                <JobFooter link={data[0]?.job_google_link ?? 'https://careers.google.com/jobs/results/'} titleJob={data[0]?.job_title}/>
             </>
         </SafeAreaView>
     )

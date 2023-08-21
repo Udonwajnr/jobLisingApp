@@ -17,16 +17,15 @@ const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
 const Welcome = ({ searchTerm, setSearchTerm, handleClick,navigation }) => {
 
-  const {userToken} = useContext(AuthContext)
+  const {userToken,userInfo} = useContext(AuthContext)
   const [activeJobType, setActiveJobType] = useState("Full-time");
 
-  const value =JSON.parse(userToken)
-  const name =value?.email?.split("@")
-
+  
+  
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Welcome, {name[0]}</Text>
+        <Text style={styles.userName}>Welcome, {userInfo?.email?.split("@")[0]}</Text>
         <Text style={styles.welcomeMessage}>Find your perfect job</Text>
       </View>
 
@@ -37,6 +36,8 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick,navigation }) => {
             value={searchTerm}
             onChangeText={(text) => setSearchTerm(text)}
             placeholder='What are you looking for?'
+            placeholderTextColor={'#94a3b8'}
+            
           />
         </View>
 

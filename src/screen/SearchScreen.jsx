@@ -32,6 +32,7 @@ const SearchScreen = ({navigation,route,}) => {
                 },
             };
 
+
             const response = await axios.request(options);
             setSearchResult(response.data.data);
         } catch (error) {

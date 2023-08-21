@@ -12,6 +12,7 @@ export const AuthProvider=({children})=>{
     const [userToken,setUserToken] = useState(null)
     const [forgetToken,setForgetToken] = useState(false)
     const [changedPassword,setChangedPassword] = useState(false)
+    const [userInfo,setUserInfo] = useState([])
 
 
     
@@ -50,7 +51,9 @@ export const AuthProvider=({children})=>{
     try{
         setIsLoading(true)
         let userToken = await AsyncStorage.getItem("data")
+       const value = userToken != null ? JSON.parse(userToken) : null;
         setUserToken(userToken)
+        setUserInfo(value)
         setIsLoading(false)
     }catch(e){
         console.log(`isLogged in error ${e}`)
@@ -82,7 +85,7 @@ export const AuthProvider=({children})=>{
     },[])
 
     return(
-        <AuthContext.Provider value={{login,logout,isLoading,userToken,signUp,forgetPassword,forgetToken,updatePassword,changedPassword }}>
+        <AuthContext.Provider value={{login,logout,isLoading,userToken,signUp,forgetPassword,forgetToken,updatePassword,changedPassword,userInfo }}>
             {children}
         </AuthContext.Provider>
     )    

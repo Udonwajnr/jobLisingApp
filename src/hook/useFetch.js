@@ -8,6 +8,7 @@ const useFetch = (endpoint, query) => {
   const [error, setError] = useState(null);
 
   const rapidApiKey = RAPID_API_KEY;
+  
 
   const options = {
     method: "GET",
